@@ -1,6 +1,11 @@
 <flux:navlist variant="outline">
     <flux:navlist.item wire:navigate icon="home" href="{{ route('dashboard') }}">Home</flux:navlist.item>
-    <flux:navlist.item wire:navigate icon="building-office" href="{{ route('company.index') }}">
+    <flux:navlist.item
+        wire:navigate
+        icon="building-office"
+        :current="request()->routeIs('company.*')"
+        href="{{ route('company.index') }}"
+    >
         Companies
     </flux:navlist.item>
     <flux:navlist.item wire:navigate icon="document-text" href="#">Documents</flux:navlist.item>

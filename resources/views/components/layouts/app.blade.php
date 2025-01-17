@@ -40,7 +40,15 @@
         >
             <x-mobile-navigation />
 
-            <x-sub-navigation />
+            <div class="flex items-end justify-between">
+                @if (isset($pageTitle))
+                    <flux:heading size="lg" class="mb-3">{{ $pageTitle }}</flux:heading>
+                @endif
+
+                @if (isset($actions))
+                    {{ $actions }}
+                @endif
+            </div>
         </flux:header>
 
         <flux:main>
@@ -54,5 +62,8 @@
         </flux:main>
 
         @fluxScripts
+        @persist('toast')
+            <flux:toast />
+        @endpersist
     </body>
 </html>

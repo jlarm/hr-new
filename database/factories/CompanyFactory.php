@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enum\Status;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -12,7 +13,8 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->company(),
+            'status' => $this->faker->randomElement(Status::cases()),
         ];
     }
 }
