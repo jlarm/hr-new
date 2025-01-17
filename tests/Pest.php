@@ -11,6 +11,9 @@
 |
 */
 
+use App\Models\User;
+use Tests\TestCase;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -41,7 +44,20 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function asSuperAdmin(): TestCase
 {
-    // ..
+    $user = User::factory()->create();
+
+    $user->assignRole('Super Admin');
+
+    return test()->actingAs($user);
+}
+
+function asManager(): TestCase
+{
+    $user = User::factory()->create();
+
+    $user->assignRole('Manager');
+
+    return test()->actingAs($user);
 }

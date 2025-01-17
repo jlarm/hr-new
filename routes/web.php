@@ -1,16 +1,20 @@
 <?php
 
+use App\Livewire\Company\Index;
 use App\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
 
-Route::get('dashboard', Dashboard::class)
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('dashboard', Dashboard::class)
+        ->name('dashboard');
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+    Route::get('companies', Index::class)
+        ->name('company.index');
+
+    Route::view('profile', 'profile')
+        ->name('profile');
+});
 
 require __DIR__ . '/auth.php';
